@@ -1,3 +1,5 @@
+from var_scout.reporters.base import BaseReporter
+
 class ShapeReporter(BaseReporter):
   def report(self, func_name, local_vars, is_crash=False, error=None):
     if is_crash:
