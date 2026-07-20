@@ -7,7 +7,7 @@ from unittest.mock import patch
 from var_scout.decorator import log_local_vars
 from var_scout.reporters.shape import ShapeReporter
 
-def test_normal_func(self):
+def test_normal_func():
   @log_local_vars()
   def normal_func():
     x = np.zeros((2, 3))
@@ -19,19 +19,20 @@ def test_normal_func(self):
   assert "Normal" in output
   assert "'x': shape=(2, 3)" in output
 
-def test_crash_func(self):
+def test_crash_func():
   @log_local_vars()
   def crash_func():
     raise ValueError("Crashed")
   
   with patch('sys.stdout', new=io.StringIO()) as fake_out:
-    with self.assertRaises(ValueError):
+    with pytest.raises(ValueError) as exc_info:
       crash_func()
     output = fake_out.getvalue()
   
+  assert "Test Error" in str(exc_info.value)
   assert "Exception" in output
   
-def test_empty_func(self):
+def test_empty_func():
   @log_local_vars()
   def empty_func(): pass
 
