@@ -1,3 +1,9 @@
+import functools
+import sys
+
+from var_scout.reporters.base import BaseReporter
+from var_scout.reporters.shape import ShapeReporter
+
 def log_local_vars(reporter: BaseReporter=ShapeReporter()):
   def decorator(func):
     @functools.wraps(func)
