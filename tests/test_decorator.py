@@ -22,7 +22,7 @@ def test_normal_func():
 def test_crash_func():
   @log_local_vars()
   def crash_func():
-    raise ValueError("Crashed")
+    raise ValueError("Test Error")
   
   with patch('sys.stdout', new=io.StringIO()) as fake_out:
     with pytest.raises(ValueError) as exc_info:
